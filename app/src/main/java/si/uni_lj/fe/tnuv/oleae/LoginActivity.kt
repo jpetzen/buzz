@@ -20,27 +20,26 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Authentication
-        auth= FirebaseAuth.getInstance()
+        // Authentication
+        auth = FirebaseAuth.getInstance()
 
-
-        //Email Validation
-        val usernameStream = binding.etEmail.editText?.let {
+        // Email Validation
+        val emailStream = binding.etEmail.editText?.let {
             RxTextView.afterTextChangeEvents(it)
-            .skipInitialValue()
-            .map{ event->
-                val username = event.view().text.toString()
-                    username.isEmpty()
-            }
+                .skipInitialValue()
+                .map { event ->
+                    val email = event.view().text.toString()
+                    email.isEmpty()
+                }
         }
-        usernameStream?.subscribe{
-            showTextMinimalAlert(it, "Email/Username")
+        emailStream?.subscribe { isValid ->
+            showTextMinimalAlert(isValid, "Email")
         }
 
-        //Password Validation
+        // Password Validation
         val passwordStream = binding.etPassword.editText?.let {
             RxTextView.afterTextChangeEvents(it)
                 .skipInitialValue()
@@ -49,57 +48,59 @@ class LoginActivity : AppCompatActivity() {
                     password.isEmpty()
                 }
         }
-        passwordStream?.subscribe{
-            showTextMinimalAlert(it, "Password")
+        passwordStream?.subscribe { isValid ->
+            showTextMinimalAlert(isValid, "Password")
         }
 
-        //Button enable true/false
+        // Button enable true/false
         val invalidFieldStream = io.reactivex.Observable.combineLatest(
-            usernameStream,
+            emailStream,
             passwordStream
-        ) { usernameInvalid: Boolean, passwordInvalid: Boolean ->
-            !usernameInvalid && !passwordInvalid
+        ) { emailInvalid: Boolean, passwordInvalid: Boolean ->
+            !emailInvalid && !passwordInvalid
         }
-        invalidFieldStream.subscribe{ isValid ->
+        invalidFieldStream.subscribe { isValid ->
             if (isValid) {
-                binding.btnSignIn.isEnabled=true
+                binding.btnSignIn.isEnabled = true
                 binding.btnSignIn.backgroundTintList = ContextCompat.getColorStateList(this, R.color.darker_blue)
-            }else{
-                binding.btnSignIn.isEnabled=false
-                binding.btnSignIn.backgroundTintList = ContextCompat.getColorStateList(this,android.R.color.darker_gray)
+            } else {
+                binding.btnSignIn.isEnabled = false
+                binding.btnSignIn.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
             }
         }
 
-        //on click
-        binding.btnSignIn.setOnClickListener{
-            val email = binding.etEmail.editText.toString().trim()
-            val password = binding.etPassword.editText.toString().trim()
-            loginUser(email,password)
+        // On click
+        binding.btnSignIn.setOnClickListener {
+            val email = binding.etEmail.editText?.text.toString().trim()
+            val password = binding.etPassword.editText?.text.toString().trim()
+            loginUser(email, password)
         }
-        binding.tvSignUp.setOnClickListener{
+        binding.tvSignUp.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
-        binding.tvForgotPassword.setOnClickListener{
-            startActivity(Intent(this,ResetPasswordActivity::class.java))
+        binding.tvForgotPassword.setOnClickListener {
+            startActivity(Intent(this, ResetPasswordActivity::class.java))
         }
     }
-    private fun showTextMinimalAlert(isNotValid: Boolean, text: String){
-        if(text == "Email/Username")
-            binding.etEmail.error=if (isNotValid) "$text field can't be empty!" else null
+
+    private fun showTextMinimalAlert(isNotValid: Boolean, text: String) {
+        if (text == "Email")
+            binding.etEmail.error = if (isNotValid) "$text field can't be empty!" else null
         else if (text == "Password")
-            binding.etPassword.error=if (isNotValid) "$text field can't be empty!" else null
+            binding.etPassword.error = if (isNotValid) "$text field can't be empty!" else null
     }
-    private fun loginUser(email:String, password:String){
-        auth.signInWithEmailAndPassword(email,password)
-            .addOnCompleteListener(this){login->
-                if (login.isSuccessful){
-                    Intent(this,HomeActivity::class.java).also{
-                        it.flags=Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+    private fun loginUser(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { login ->
+                if (login.isSuccessful) {
+                    Intent(this, HomeActivity::class.java).also {
+                        it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(it)
-                        Toast.makeText(this,"Login successful", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                     }
-                }else {
-                    Toast.makeText(this,login.exception?.message, Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, login.exception?.message, Toast.LENGTH_SHORT).show()
                 }
             }
     }

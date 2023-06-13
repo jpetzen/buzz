@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/mosquito" />
+        app:srcCompat="@drawable/mosquito_24" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -74,27 +74,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/et_User_Name"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="32dp"
-                app:startIconDrawable="@drawable/icon_menu_profile"
-                app:startIconTint="@color/app_theme"
-                android:hint="@string/register_hint_username"
-                android:inputType="text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_email"
-                app:boxStrokeColor="@color/app_theme">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:ems="10"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/et_password"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
@@ -107,7 +86,7 @@
                 app:boxStrokeColor="@color/app_theme"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_User_Name">
+                app:layout_constraintTop_toBottomOf="@+id/et_email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -115,6 +94,7 @@
                     android:inputType="textPassword"
                     android:ems="10"/>
             </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 android:id="@+id/btn_register"
                 android:layout_width="0dp"
@@ -122,15 +102,18 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/app_theme"
+                android:enabled="false"
                 android:text="@string/register_btn_register"
                 app:cornerRadius="16dp"
-                android:enabled="false"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_password" />
+                app:layout_constraintTop_toBottomOf="@+id/et_password"
+                app:layout_constraintVertical_bias="0.725" />
 
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -153,8 +136,7 @@
                     android:layout_weight="0"
                     android:text="@string/register_login"
                     android:textColor="@color/app_theme"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

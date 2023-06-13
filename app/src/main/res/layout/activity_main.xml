@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:background="@color/app_theme"
+    tools:context=".MainActivity"
     >
 
     <TextView
@@ -76,9 +76,13 @@
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/login_text_background"
                 android:text="@string/start_page_btn_register"
-                tools:layout_editor_absoluteY="371dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_sign"
+                tools:ignore="MissingConstraints" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_sign"
@@ -86,7 +90,11 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/login_text_background"
                 android:text="@string/start_page_btn_login"
-                tools:layout_editor_absoluteY="293dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.75"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="0dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

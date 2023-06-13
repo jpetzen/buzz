@@ -27,20 +27,6 @@ class RegisterActivity : AppCompatActivity() {
         auth= FirebaseAuth.getInstance()
 
 
-        //Username Validation
-        val usernameStream = binding.etUserName.editText?.let {
-            RxTextView.afterTextChangeEvents(it)
-                .skipInitialValue()
-                .map { event ->
-                    val usernameStream = event.view().text.toString()
-                        usernameStream.length < 6
-                        usernameStream.isEmpty()
-                }
-        }
-        usernameStream?.subscribe {
-            showTextMinimalAlert(it, "UserName")
-        }
-
         //Email Validation
         val emailStream = binding.etEmail.editText?.let{
             RxTextView.afterTextChangeEvents(it)
@@ -73,10 +59,10 @@ class RegisterActivity : AppCompatActivity() {
         //Button enable true/false
         val invalidFieldsStream = io.reactivex.Observable.combineLatest(
             emailStream,
-            usernameStream,
+
             passwordStream
-        ) { usernameInvalid: Boolean, emailInvalid: Boolean, passwordInvalid: Boolean ->
-            !usernameInvalid && !emailInvalid && !passwordInvalid
+        ) { emailInvalid: Boolean, passwordInvalid: Boolean ->
+            !emailInvalid && !passwordInvalid
         }
         invalidFieldsStream.subscribe{ isValid ->
             if (isValid) {
@@ -103,9 +89,7 @@ class RegisterActivity : AppCompatActivity() {
     //    binding.etf.error=if(isNotValid)"Name already in use" else null
     //}
     private fun showTextMinimalAlert(isNotValid: Boolean, text: String){
-        if (text == "UserName")
-            binding.etUserName.error=if (isNotValid) "$text is not valid" else null
-        else if (text == "Password")
+        if (text == "Password")
             binding.etPassword.error=if (isNotValid) "$text is not valid" else null
         else if (text == "email")
             binding.etEmail.error=if (isNotValid) "$text is not valid" else null

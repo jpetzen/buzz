@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">Buzz Buster</string>
+    //main page
+    <string name="StartTitle">Welcome to Buzz Buster</string>
+    <string name="start_sub_text">Login to get started.</string>
+
+
+    //menu
+    <string name="navigation_menu_settings">Settings</string>
+    <string name="navigation_menu_statistics">Statistics</string>
+    <string name="navigation_menu_monitor">Monitor</string>
+    <string name="navigation_menu_home">Home</string>
+
+
+    //settings page
+    <string name="settings_first_part_title">General</string>
+    <string name="settings_first_part_first_option">Dark Mode</string>
+    <string name="settings_first_part_second_option">Notifications</string>
+    <string name="settings_second_part_title">About</string>
+    <string name="settings_about_first_text">Version</string>
+    <string name="settings_about_second_text">1.0.0</string>
+
+
+    //home page
+    <string name="fragment_name_home">Home</string>
+    <string name="fragment_name_monitor">Monitor</string>
+    <string name="fragment_name_Statistics">Statistics</string>
+    <string name="fragment_name_settings">Settings\n</string>
+
+
+    //statistics page
+
+
+    //login page
+    <string name="login_greetings">Welcome\nBack</string>
+    <string name="login_hint_pwd">Password</string>
+    <string name="login_forgot_pwd">Forgot Password?</string>
+    <string name="login_btn_sign_in">Sign In</string>
+    <string name="login_new_account">Don\'t have an account?</string>
+    <string name="login_sign_up"> Sign Up</string>
+    <string name="login_hint_email">Email or Username</string>
+
+
+    //sign up page
+    <string name="register_create_account">Create an account</string>
+    <string name="register_full_name">Your full name</string>
+    <string name="hint_full_name">Your full name</string>
+    <string name="register_btn_register">Register</string>
+    <string name="register_login"> Login</string>
+    <string name="register_already_account">I already have an account! </string>
+    <string name="start_page_btn_register">REGISTER</string>
+    <string name="start_page_btn_login">Login</string>
+    <string name="register_hint_username">Username</string>
+    <string name="register_hint_email">Email</string>
+
+
+    //forgot password page
+    <string name="reset_login_in">Login In</string>
+    <string name="reset_back_to">Back to</string>
+    <string name="btn_reset_password">Reset password</string>
+
+</resources>

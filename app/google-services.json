@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "544000826968",
+    "project_id": "oliveguardapp",
+    "storage_bucket": "oliveguardapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544000826968:android:e453d95b81734ed129342d",
+        "android_client_info": {
+          "package_name": "si.uni_lj.fe.tnuv.oleae"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDowaCv2aqhtdRaJVEk7HbYLj9Kqb0J9mI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -19,15 +19,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        auth=FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()
 
-        binding.btnSign.setOnClickListener{
-            startActivity(Intent(this,LoginActivity::class.java))
+        binding.btnSign.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
         }
-        binding.btnRegister.setOnClickListener{
-            startActivity(Intent(this,RegisterActivity::class.java))
+        binding.btnRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
-
 
 }

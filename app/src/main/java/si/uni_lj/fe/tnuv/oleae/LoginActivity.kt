@@ -11,17 +11,53 @@ import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.jakewharton.rxbinding2.widget.RxTextView
 import si.uni_lj.fe.tnuv.oleae.databinding.ActivityLoginBinding
+import android.content.Context
+import android.content.SharedPreferences
+
+class SharedPrefManager(context: Context) {
+    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
+    private val editor: SharedPreferences.Editor = sharedPreferences.edit()
+
+    fun saveUser(email: String) {
+        editor.putString("EMAIL", email)
+        editor.apply()
+    }
+
+    fun isUserLogged(): Boolean {
+        val email = sharedPreferences.getString("EMAIL", "")
+        return email?.isNotEmpty() == true
+    }
+
+    fun getUserDetails(): String? {
+        val email = sharedPreferences.getString("EMAIL", "")
+        return if (email?.isNotEmpty() == true) email else null
+    }
+
+    fun logout() {
+        editor.clear()
+        editor.apply()
+    }
+}
 
 @SuppressLint("CheckResult")
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
-
+    private lateinit var sharedPrefManager: SharedPrefManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Instantiate SharedPrefManager
+        sharedPrefManager = SharedPrefManager(this)
+
+        // Check if user is logged in
+        if (sharedPrefManager.isUserLogged()) {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        }
 
         // Authentication
         auth = FirebaseAuth.getInstance()
@@ -94,6 +130,9 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { login ->
                 if (login.isSuccessful) {
+                    // Save user to SharedPreferences
+                    sharedPrefManager.saveUser(email)
+
                     Intent(this, HomeActivity::class.java).also {
                         it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(it)

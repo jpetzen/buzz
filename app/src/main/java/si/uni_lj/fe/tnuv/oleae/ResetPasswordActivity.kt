@@ -15,64 +15,67 @@ import si.uni_lj.fe.tnuv.oleae.databinding.ActivityResetPasswordBinding
 class ResetPasswordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityResetPasswordBinding
-    private lateinit var auth:FirebaseAuth
-
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivityResetPasswordBinding.inflate(layoutInflater)
+        binding = ActivityResetPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Authentication
         auth = FirebaseAuth.getInstance()
 
-
-        //Email Validation
-        val emailStream = binding.etEmail.editText?.let{
+        // Email Validation
+        val emailStream = binding.etEmail.editText?.let {
             RxTextView.afterTextChangeEvents(it)
                 .skipInitialValue()
                 .map { event ->
-                    val email=event.view().text.toString()
-                    email.isEmpty()
-                    !Patterns.EMAIL_ADDRESS.matcher(email).matches()
+                    val email = event.view().text.toString()
+                    email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()
                 }
-
         }
-        emailStream?.subscribe{
+        emailStream?.subscribe {
             showEmailValidAlert(it)
         }
 
-        //reset password
-        binding.btnResetPwd.setOnClickListener{
-            val email = binding.etEmail.editText.toString().trim()
+        // Reset password
+        binding.btnResetPwd.setOnClickListener {
+            val email = binding.etEmail.editText?.text.toString().trim()
 
             auth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(this){reset->
-                    if (reset.isSuccessful){
-                        Intent(this,LoginActivity::class.java).also{
-                            it.flags=Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                .addOnCompleteListener(this) { reset ->
+                    if (reset.isSuccessful) {
+                        Intent(this, LoginActivity::class.java).also {
+                            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(it)
-                            Toast.makeText(this,"Check your email for password reset.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this,
+                                "Check your email for password reset.",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
-                    }else{
-                        Toast.makeText(this,reset.exception?.message, Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, reset.exception?.message, Toast.LENGTH_SHORT).show()
                     }
                 }
-            //Click
-            binding.tvBackLogin.setOnClickListener{
-                startActivity(Intent(this, LoginActivity::class.java))
-            }
+        }
+
+        // Click
+        binding.tvBackLogin.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
-    private fun showEmailValidAlert(isNotValid:Boolean){
-        if (isNotValid){
-            binding.etEmail.error="Email invalid"
-            binding.btnResetPwd.isEnabled=false
-            binding.btnResetPwd.backgroundTintList = ContextCompat.getColorStateList(this,android.R.color.darker_gray)
-        }else{
-            binding.etEmail.error=null
-            binding.btnResetPwd.isEnabled=true
-            binding.btnResetPwd.backgroundTintList = ContextCompat.getColorStateList(this, R.color.darker_blue)
+
+    private fun showEmailValidAlert(isNotValid: Boolean) {
+        if (isNotValid) {
+            binding.etEmail.error = "Email invalid"
+            binding.btnResetPwd.isEnabled = false
+            binding.btnResetPwd.backgroundTintList =
+                ContextCompat.getColorStateList(this, android.R.color.darker_gray)
+        } else {
+            binding.etEmail.error = null
+            binding.btnResetPwd.isEnabled = true
+            binding.btnResetPwd.backgroundTintList =
+                ContextCompat.getColorStateList(this, R.color.darker_blue)
         }
     }
 }

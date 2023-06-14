@@ -22,6 +22,7 @@
             android:layout_centerVertical="true"
             android:textSize="20sp"
             android:textColor="@color/white"
+            android:paddingLeft="12dp"
             android:layout_toEndOf="@id/logo"/>
     </RelativeLayout>
 

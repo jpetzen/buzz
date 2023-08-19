@@ -1,11 +1,39 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Oleae" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Oleae" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Oleae" parent="Base.Theme.Oleae" />
+    <style name="toolbarBackground">
+        <item name="android:background">@color/app_theme</item>
+    </style>
+    <style name="toolbarText">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="fragmentsBackground">
+        <item name="android:backgroundTint">@color/white</item>
+    </style>
+
+    <style name="normal_text">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="logging_background">
+        <item name="android:background">@color/app_theme</item>
+    </style>
+    <style name="logging_tittle">
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="logging_option">
+        <item name="android:textColor">@color/app_theme</item>
+    </style>
+    <style name="logging_text">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="logging_button">
+        <item name="android:backgroundTint">@color/app_theme</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
 
 
@@ -29,6 +57,7 @@
     </style>
 
     <style name="intro_card" parent="">
+        <item name="backgroundColor">@color/white</item>
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopRight">48dp</item>
         <item name="cornerSizeTopLeft">48dp</item>

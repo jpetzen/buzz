@@ -15,5 +15,9 @@
     <color name="app_theme">#009dff</color>
     <color name="app_theme_light">#f6fbff</color>
     <color name="edit_text_border">#03A9F4</color>
+
+    <color name="dark_app_theme">#055587</color>
     <color name="edit_text_background">#f6fbff</color>
+    <color name="dark_main">#4A4A4A</color>
+    <color name="screen">#1e1e1e</color>
 </resources>

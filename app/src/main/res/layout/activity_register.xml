@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_theme"
+    style="@style/logging_background"
     tools:context=".RegisterActivity">
 
     <ImageView
@@ -31,7 +31,7 @@
         android:layout_marginStart="12dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/register_create_account"
-        android:textColor="@color/white"
+        style="@style/logging_tittle"
         android:textSize="36dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent" />
@@ -41,7 +41,6 @@
         style="@style/custom_card_view_style"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:cardBackgroundColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline">
@@ -70,7 +69,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="text"
-                    android:ems="10"/>
+                    android:ems="10"
+                    style="@style/fragmentsBackground"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -92,7 +93,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textPassword"
-                    android:ems="10"/>
+                    android:ems="10"
+                    style="@style/fragmentsBackground"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -101,7 +104,7 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:backgroundTint="@color/app_theme"
+                style="@style/logging_button"
                 android:enabled="false"
                 android:text="@string/register_btn_register"
                 app:cornerRadius="16dp"
@@ -127,15 +130,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
+                    style="@style/logging_text"
                     android:text="@string/register_already_account" />
 
                 <TextView
                     android:id="@+id/tv_have_account"
+                    style="@style/logging_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:text="@string/register_login"
-                    android:textColor="@color/app_theme"
                     android:textStyle="bold" />
             </LinearLayout>
 

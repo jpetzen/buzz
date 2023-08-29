@@ -9,6 +9,6 @@
         android:icon="@drawable/navigation_bar_statistics"/>
     <item android:title="@string/navigation_menu_statistics"
         android:id="@+id/settings"
-        android:icon="@drawable/navigation_bar_settings"/>
+        android:icon="@drawable/navigation_bar_settings" />
 
 </menu>
